@@ -1,0 +1,25 @@
+{
+  "name": "prodapptivity",
+  "version": "1.0.0",
+  "description": "- install dependencies\r pip install -r requirements.txt",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reganlam/prodapptivity.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/reganlam/prodapptivity/issues"
+  },
+  "homepage": "https://github.com/reganlam/prodapptivity#readme",
+  "dependencies": {
+    "@react-oauth/google": "^0.11.1",
+    "active-win": "^8.1.0",
+    "electron": "^26.2.2"
+  }
+}
