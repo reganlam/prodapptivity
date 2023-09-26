@@ -18,7 +18,6 @@
   },
   "homepage": "https://github.com/reganlam/prodapptivity#readme",
   "dependencies": {
-    "@react-oauth/google": "^0.11.1",
     "active-win": "^8.1.0",
     "electron": "^26.2.2"
   }

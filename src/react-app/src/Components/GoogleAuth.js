@@ -1,15 +1,14 @@
 import React, { useEffect } from "react";
 
-const GoogleAuth = () => {
-  function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
-    // You can perform additional actions with the response here
-  }
+function handleCredentialResponse(response) {
+  console.log("Encoded JWT ID token: " + response.credential);
+  // You can perform additional actions with the response here
+}
 
+const GoogleAuth = () => {
   useEffect(() => {
     window.google.accounts.id.initialize({
-      client_id:
-        "993845204502-ool7i64vnbh99qq0h4s3hb0bcjsnpjkg.apps.googleusercontent.com",
+      client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
       callback: handleCredentialResponse,
     });
 
