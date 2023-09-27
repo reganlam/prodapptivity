@@ -19,6 +19,7 @@
   "homepage": "https://github.com/reganlam/prodapptivity#readme",
   "dependencies": {
     "active-win": "^8.1.0",
-    "electron": "^26.2.2"
+    "electron": "^26.2.2",
+    "express": "^4.18.2"
   }
 }
