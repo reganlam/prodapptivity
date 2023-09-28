@@ -4,14 +4,13 @@ import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [verificationResult, setVerificationResult] = useState(null);
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        {user ? `Hello ${user.name}` : "Not logged in"}{" "}
-        <GoogleAuth onAuthCallback={setUser} />
+        <GoogleAuth onVerificationResult={setVerificationResult} />
       </header>
     </div>
   );

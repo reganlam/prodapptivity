@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
 const port = 3001; // Use the specified port or default to 3000
+const authRouter = require("./routes/auth");
 
 // Middleware to parse JSON request bodies
 app.use(express.json());
 
-// Define a sample route
+app.use("/user", authRouter);
+
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
@@ -17,4 +19,4 @@ app.listen(port, () => {
 
 // Run task
 const logActiveWindow = require("./task");
-setInterval(logActiveWindow, 1000);
+setInterval(logActiveWindow, 10000);

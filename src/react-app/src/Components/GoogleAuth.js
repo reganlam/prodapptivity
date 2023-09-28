@@ -1,7 +1,21 @@
 import React, { useEffect } from "react";
-import jwt_decode from "jwt-decode";
+import axios from "axios";
 
-const GoogleAuth = ({ onAuthCallback }) => {
+const verifyToken = async () => {
+  try {
+    const jwtToken = localStorage.getItem("jwtToken");
+
+    // TODO: fix url
+    const response = await axios.post("http://localhost:3001/user/verify", {
+      jwtToken,
+    });
+    return response.data.message;
+  } catch (error) {
+    return error.response ?? error.message;
+  }
+};
+
+const GoogleAuth = ({ onVerificationResult }) => {
   useEffect(() => {
     window.google.accounts.id.initialize({
       client_id: process.env.REACT_APP_GOOGLE_OAUTH_CLIENT_ID,
@@ -9,7 +23,7 @@ const GoogleAuth = ({ onAuthCallback }) => {
     });
 
     window.google.accounts.id.renderButton(
-      document.getElementById("buttonDiv"),
+      document.getElementById("signInDiv"),
       {
         theme: "outline",
         size: "large",
@@ -19,17 +33,17 @@ const GoogleAuth = ({ onAuthCallback }) => {
     window.google.accounts.id.prompt();
   }, []);
 
-  function handleCredentialResponse(response) {
-    console.log("Encoded JWT ID token: " + response.credential);
-    var test = jwt_decode(response.credential);
-    console.log(test);
+  const handleCredentialResponse = async (response) => {
+    localStorage.setItem("jwtToken", response.credential);
 
-    onAuthCallback(test);
-  }
+    const verificationResult = await verifyToken();
+    console.log("verificationResult: ", verificationResult);
+    onVerificationResult(verificationResult);
+  };
 
   return (
     <div>
-      <div id="buttonDiv" />
+      <div id="signInDiv" />
     </div>
   );
 };
