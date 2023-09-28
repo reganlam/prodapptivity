@@ -1,17 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const jwt = require("jsonwebtoken");
+const verifyToken = require("../utils/verifyToken");
 
-router.post("/verify", (req, res) => {
-  const { token } = req.body;
+router.post("/verify", async (req, res) => {
+  const { jwtToken } = req.body;
+  const decodedToken = await verifyToken(jwtToken);
 
-  jwt.verify(token, "your-secret-key", (err, decoded) => {
-    if (err) {
-      return res.status(401).json({ message: "Token is invalid" });
-    }
+  if (!decodedToken) {
+    return res.status(401).json({ error: "Token verification failed" });
+  }
 
-    return res.status(200).json({ message: "Token is valid", decoded });
-  });
+  console.log(decodedToken);
+
+  return res.status(200).json({ message: "Token verified successfully" });
 });
 
 module.exports = router;

@@ -1,10 +1,12 @@
 const express = require("express");
 const app = express();
-const port = 3001; // Use the specified port or default to 3000
+const port = process.env.PORT;
 const authRouter = require("./routes/auth");
+const cors = require("cors");
+require("dotenv").config();
 
-// Middleware to parse JSON request bodies
 app.use(express.json());
+app.use(cors());
 
 app.use("/user", authRouter);
 
@@ -19,4 +21,4 @@ app.listen(port, () => {
 
 // Run task
 const logActiveWindow = require("./task");
-setInterval(logActiveWindow, 10000);
+setInterval(logActiveWindow, 30000);
