@@ -22,9 +22,12 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
-// Run task
-import logActiveWindow from "./task.js";
-setInterval(logActiveWindow, 1000);
-
 // Database
 database();
+
+// Run task
+import activityTask from "./task.js";
+let activityData = {};
+setInterval(async () => {
+  activityData = await activityTask(activityData);
+}, 1000);
