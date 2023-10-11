@@ -1,4 +1,4 @@
-const { OAuth2Client } = require("google-auth-library");
+import { OAuth2Client } from "google-auth-library";
 
 const client = new OAuth2Client();
 
@@ -19,4 +19,4 @@ async function verifyToken(idToken) {
   }
 }
 
-module.exports = verifyToken;
+export default verifyToken;

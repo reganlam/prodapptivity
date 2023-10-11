@@ -1,11 +1,14 @@
-const express = require("express");
+import express, { json } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import authRouter from "./routes/auth.js";
+import database from "./db/database.js";
+
+dotenv.config();
 const app = express();
 const port = process.env.PORT;
-const authRouter = require("./routes/auth");
-const cors = require("cors");
-require("dotenv").config();
 
-app.use(express.json());
+app.use(json());
 app.use(cors());
 
 app.use("/user", authRouter);
@@ -20,5 +23,8 @@ app.listen(port, () => {
 });
 
 // Run task
-const logActiveWindow = require("./task");
-setInterval(logActiveWindow, 30000);
+import logActiveWindow from "./task.js";
+setInterval(logActiveWindow, 1000);
+
+// Database
+database();

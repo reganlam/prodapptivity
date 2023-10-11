@@ -8,10 +8,10 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <GoogleAuth onVerificationResult={setVerificationResult} />
-      </header>
+      </div>
     </div>
   );
 }

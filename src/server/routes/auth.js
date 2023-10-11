@@ -1,6 +1,7 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const verifyToken = require("../utils/verifyToken");
+
+import verifyToken from "../utils/verifyToken.js";
 
 router.post("/verify", async (req, res) => {
   const { jwtToken } = req.body;
@@ -15,4 +16,4 @@ router.post("/verify", async (req, res) => {
   return res.status(200).json({ message: "Token verified successfully" });
 });
 
-module.exports = router;
+export default router;
