@@ -1,12 +1,6 @@
 import activeWin from "active-win";
 import ActivityModel from "./db/models/Activity.js";
 
-// Every minute
-const MAX_SIZE = 10;
-
-// TODO: mutable
-let currentSize = 0;
-
 function incrementActivityData(activeWindow, activityData) {
   const updatedActivityData = { ...activityData };
 
@@ -17,10 +11,6 @@ function incrementActivityData(activeWindow, activityData) {
   }
 
   return updatedActivityData;
-}
-
-function isActivityDataFull(currSize) {
-  return currSize >= MAX_SIZE;
 }
 
 function createActivity(activityData) {
@@ -73,25 +63,14 @@ function saveActivity(activity) {
     });
 }
 
-async function logActiveWindow(activityData) {
+async function logActivity(activityData) {
   try {
     const activeWindow = await activeWin();
-
     activityData = incrementActivityData(activeWindow, activityData);
-    currentSize += 1;
-
-    if (!isActivityDataFull(currentSize)) {
-      return activityData;
-    }
-
-    const activity = createActivity(activityData);
-    saveActivity(activity);
-
-    currentSize = 0;
-    return {};
+    return activityData;
   } catch (error) {
     console.error("Error:", error);
   }
 }
 
-export default logActiveWindow;
+export { logActivity, createActivity, saveActivity };

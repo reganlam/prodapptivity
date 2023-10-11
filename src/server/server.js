@@ -26,8 +26,17 @@ app.listen(port, () => {
 database();
 
 // Run task
-import activityTask from "./task.js";
+import { logActivity, createActivity, saveActivity } from "./task.js";
 let activityData = {};
+
 setInterval(async () => {
-  activityData = await activityTask(activityData);
+  activityData = await logActivity(activityData);
 }, 1000);
+
+setInterval(async () => {
+  const originalActivityData = { ...activityData };
+  const activity = createActivity(originalActivityData);
+  saveActivity(activity);
+
+  activityData = {};
+}, 10050);
